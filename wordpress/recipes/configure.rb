@@ -41,7 +41,7 @@ node[:deploy].each do |app_name, deploy|
     # Backup existing database 
 	mysqldump_command = "/usr/bin/mysqldump -h #{deploy[:database][:host]} -u #{deploy[:database][:username]} #{node[:mysql][:server_root_password].blank? ? '' : "-p#{node[:mysql][:server_root_password]}"} #{deploy[:database][:database]}"
 	
-	Chef::Log.debug("Backup current Wordpress database")
+	Chef::Log.info("Backup current Wordpress database")
 	script "memory_swap" do
 		interpreter "bash"
 		user "root"
