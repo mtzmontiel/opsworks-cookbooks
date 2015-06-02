@@ -45,7 +45,7 @@ node[:deploy].each do |app_name, deploy|
 	script "memory_swap" do
 		interpreter "bash"
 		user "root"
-		cwd "#{node[:rdsbackup][:storage]}/"
+		cwd "/srv/mysqlbackup/"
 		code <<-EOH
 			#mysqldump_command | /bin/gzip > #{deploy[:database]}_$(date +%Y_%m_%d)
 		EOH
