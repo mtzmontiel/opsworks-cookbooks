@@ -47,7 +47,7 @@ node[:deploy].each do |app_name, deploy|
 		user "root"
 		cwd "/srv/mysqlbackup/"
 		code <<-EOH
-			#{mysqldump_command} | /bin/gzip > #{deploy[:database]}_$(date +%Y_%m_%d)
+			#{mysqldump_command} > #{deploy[:database]}_$(date +%Y_%m_%d).dmp
 		EOH
 	end
 
