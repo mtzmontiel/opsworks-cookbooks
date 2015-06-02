@@ -38,7 +38,18 @@ node[:deploy].each do |app_name, deploy|
             :keys       => (keys rescue nil)
         )
     end
-
+    # Backup existing database 
+	mysqldump_command = "/usr/bin/mysqldump -h #{deploy[:database][:host]} -u #{deploy[:database][:username]} #{node[:mysql][:server_root_password].blank? ? '' : "-p#{node[:mysql][:server_root_password]}"} #{deploy[:database][:database]}"
+	
+	Chef::Log.debug("Backup current Wordpress database")
+	script "memory_swap" do
+		interpreter "bash"
+		user "root"
+		cwd "#{deploy[:rdsbackup][:storage]}/"
+		code <<-EOH
+			#mysqldump_command | /bin/gzip > #{deploy[:database]}_$(date +%Y_%m_%d)
+		EOH
+	end
 
 	# Import Wordpress database backup from file if it exists
 	mysql_command = "/usr/bin/mysql -h #{deploy[:database][:host]} -u #{deploy[:database][:username]} #{node[:mysql][:server_root_password].blank? ? '' : "-p#{node[:mysql][:server_root_password]}"} #{deploy[:database][:database]}"
