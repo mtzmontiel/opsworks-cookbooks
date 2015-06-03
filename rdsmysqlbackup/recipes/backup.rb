@@ -7,7 +7,7 @@ node[:deploy].each do |app_name, deploy|
 	script "mysql_backup" do
 		interpreter "bash"
 		user "root"
-		cwd "${default[:rdsbackup][:storage]}/"
+		cwd node['rdsbackup']['storage']
 		code <<-EOH
 			/usr/bin/mysqldump -h #{deploy[:database][:host]} -u #{deploy[:database][:username]} -p#{deploy[:database][:password]} #{deploy[:database][:database]} \
 				| gzip \
