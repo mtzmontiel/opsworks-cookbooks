@@ -3,7 +3,7 @@
 
 # Backup existing database 
 node[:deploy].each do |app_name, deploy|
-	Chef::Log.info("Backup current Wordpress database")
+	Chef::Log.info("Backup current #{deploy[:database][:database]} database")
 	script "mysql_backup" do
 		interpreter "bash"
 		user "root"
