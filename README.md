@@ -18,6 +18,12 @@ Configure Wordpress to interact with the MySQL server. It can be used for a fres
 Available recipes for [AWS OpsWorks Lifecycle Events](http://docs.aws.amazon.com/opsworks/latest/userguide/workingcookbook-events.html):
 * **Configure**: wordpress::configure; Create wp-config.php file along with Cronjob
 
+## RDSMySQLBackup
+
+Perform a backup of a MySQL database using mysqldump.
+
+Available recipes for [AWS OpsWorks Lifecycle Events](http://docs.aws.amazon.com/opsworks/latest/userguide/workingcookbook-events.html):
+* **Backup**: rdsmysqlbackup::backup; Create a backup of current database.
 
 ## Other
 All other cookbooks are currently in a work-in-progress state and might not work.
