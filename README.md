@@ -24,8 +24,8 @@ Perform a snapshot of a RDS instance using aws cli.
 
 Available recipes for [AWS OpsWorks Lifecycle Events](http://docs.aws.amazon.com/opsworks/latest/userguide/workingcookbook-events.html):
 * **Backup**: rdssnapshot::snapshot; Create a snapshot of RDS layer. Requires configuration of the following attributes: 
-** **['clipmx']['rds']['region']**: Region of the RDS
-** **['clipmx']['rds']['instancename']**: Short name of the instance of the RDS Layer
+ * * **['clipmx']['rds']['region']**: Region of the RDS
+ * * **['clipmx']['rds']['instancename']**: Short name of the instance of the RDS Layer
 
 
 ## RDSMySQLBackup
