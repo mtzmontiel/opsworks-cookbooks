@@ -11,9 +11,11 @@ script "create_snapshot" do
 		[ ! -d ~/.aws ] && mkdir ~/.aws
 		echo [default] > ~/.aws/config 
 		echo [profile rmm] >> ~/.aws/config
-		echo [rmm] > ~/.aws/credentials
+		echo [default] ~/.aws/credentials
+		echo [rmm] >> ~/.aws/credentials
 		echo aws_access_key_id=#{node['clipmx']['rds']['key']} >> ~/.aws/credentials
 		echo aws_secret_access_key=#{node['clipmx']['rds']['secret']} >> ~/.aws/credentials
+		chmod 600 ./aws/*
 		aws rds create-db-snapshot \
 			--region=#{node['clipmx']['rds']['region']} \
 			--db-snapshot-identifier=#{node['clipmx']['rds']['instancename']}-$(date +%Y-%m-%d-%H-%M-%S) \
