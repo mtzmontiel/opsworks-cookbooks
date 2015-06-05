@@ -14,11 +14,10 @@ script "create_snapshot" do
 	
 	
 	code <<-EOH
-		echo who am i > /tmp/chef-who-$(date +%Y-%m-%d).txt
-		echo ~ >> /tmp/chef-who-$(date +%Y-%m-%d).txt
 		aws rds create-db-snapshot \
 			--region=#{node['clipmx']['rds']['region']} \
 			--db-snapshot-identifier=#{node['clipmx']['rds']['instancename']}-$(date +%Y-%m-%d-%H-%M-%S) \
-			--db-instance-identifier=#{node['clipmx']['rds']['instancename']}
+			--db-instance-identifier=#{node['clipmx']['rds']['instancename']} \
+			--profile rmm
 	EOH
 end
