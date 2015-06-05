@@ -8,6 +8,7 @@ script "create_snapshot" do
 	
 	
 	code <<-EOH
+		[ ! -d ~/.aws ] && mkdir ~/.aws 
 		echo [rmm] > ~/.aws/credentials
 		echo aws_access_key_id=#{node['clipmx']['rds']['key']} >> ~/.aws/credentials
 		echo aws_secret_access_key=#{node['clipmx']['rds']['secret']} >> ~/.aws/credentials
