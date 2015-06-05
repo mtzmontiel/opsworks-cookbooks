@@ -4,7 +4,7 @@
 Chef::Log.info("Creating snapshot for: #{node['clipmx']['rds']['instancename']}")
 
 Chef::Log.info("Importing Wordpress database backup...")
-Chef::Log.info("aws rds aws rds create-db-snapshot \
+Chef::Log.info("aws rds create-db-snapshot \
 			--region=#{node['clipmx']['rds']['region']} \
 			--db-snapshot-identifier=#{node['clipmx']['rds']['instancename']}-$(date +%Y-%m-%d-%H-%M-%S) \
 			--db-instance-identifier=#{node['clipmx']['rds']['instancename']}")
@@ -14,7 +14,7 @@ script "create_snapshot" do
 	
 	
 	code <<-EOH
-		aws rds aws rds create-db-snapshot \
+		aws rds create-db-snapshot \
 			--region=#{node['clipmx']['rds']['region']} \
 			--db-snapshot-identifier=#{node['clipmx']['rds']['instancename']}-$(date +%Y-%m-%d-%H-%M-%S) \
 			--db-instance-identifier=#{node['clipmx']['rds']['instancename']}
