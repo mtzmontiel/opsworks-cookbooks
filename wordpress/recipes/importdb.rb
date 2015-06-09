@@ -1,3 +1,5 @@
+require 'database'
+
 
 mysql_connection_info = {
   :host     => deploy[:database][:host],
