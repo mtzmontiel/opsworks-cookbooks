@@ -40,16 +40,16 @@ node[:deploy].each do |app_name, deploy|
     end
 
 	# Import Wordpress database backup from file if it exists
-	mysql_command = "/usr/bin/mysql -h #{deploy[:database][:host]} -u #{deploy[:database][:username]} #{node[:mysql][:server_root_password].blank? ? '' : "-p#{node[:mysql][:server_root_password]}"} #{deploy[:database][:database]}"
+	mysql_command = "/usr/bin/mysql -h #{deploy[:database][:host]} -u #{deploy[:database][:username]} -p#{deploy[:database][:password]} #{deploy[:database][:database]}"
 
 	Chef::Log.info("Importing Wordpress database backup...")
-	script "memory_swap" do
+	script "import_database" do
 		interpreter "bash"
 		user "root"
 		cwd "#{deploy[:deploy_to]}/current/"
 		code <<-EOH
 			if ls #{deploy[:deploy_to]}/current/*.sql &> /dev/null; then 
-				#{mysql_command} < #{deploy[:deploy_to]}/current/*.sql;
+				#{mysql_command} < #{deploy[:deploy_to]}/current/*.sql || (echo Could not execute update of database ; exit 1;)
 				rm #{deploy[:deploy_to]}/current/*.sql;
 			fi;
 		EOH
