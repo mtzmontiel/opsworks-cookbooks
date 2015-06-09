@@ -1,4 +1,4 @@
-execute "run_sql_#{path}" do
+execute "create_db" do
 			command "/usr/bin/mysql --verbose -h #{deploy[:database][:host]} -u #{deploy[:database][:username]} -p#{deploy[:database][:password]} #{deploy[:database][:database]} < `echo create #{deploy[:database][:database]}` > /tmp/out.tmp"
 			not_if "echo \"/* ping */ SELECT 1\" | /usr/bin/mysql --verbose -h #{deploy[:database][:host]} -u #{deploy[:database][:username]} -p#{deploy[:database][:password]} #{deploy[:database][:database]}" 
 		end
