@@ -7,9 +7,6 @@
 #  :password => deploy[:database][:password]
 #}
 
-# Import Wordpress database backup from file if it exists
-mysql_command = "/usr/bin/mysql -h #{deploy[:database][:host]} -u #{deploy[:database][:username]} -p#{deploy[:database][:password]} #{deploy[:database][:database]}"
-
 Chef::Log.info("Importing Wordpress database backup: #{deploy[:deploy_to]}/current/*.sql")
 Dir["#{deploy[:deploy_to]}/current/*.sql"].each do |path|
 #	mysql_database "#{deploy[:database][:database]}" do
@@ -17,7 +14,7 @@ Dir["#{deploy[:deploy_to]}/current/*.sql"].each do |path|
 #		sql "source #{path};"
 #	end
 	execute "run_sql_#{path}" do
-		command "#{mysql_command} < #{path}"
+		command "/usr/bin/mysql -h #{deploy[:database][:host]} -u #{deploy[:database][:username]} -p#{deploy[:database][:password]} #{deploy[:database][:database]}" < #{path}"
 	end
 end
 
