@@ -43,16 +43,15 @@ node[:deploy].each do |app_name, deploy|
 	mysql_command = "/usr/bin/mysql -h #{deploy[:database][:host]} -u #{deploy[:database][:username]} -p#{deploy[:database][:password]} #{deploy[:database][:database]}"
 
 	Chef::Log.info("Importing Wordpress database backup...")
-	script "import_database" do
-		interpreter "bash"
-		user "root"
-		cwd "#{deploy[:deploy_to]}/current/"
-		code <<-EOH
-			if ls #{deploy[:deploy_to]}/current/*.sql &> /dev/null; then 
-				#{mysql_command} < #{deploy[:deploy_to]}/current/*.sql || (echo Could not execute update of database ; exit 1;)
-				rm #{deploy[:deploy_to]}/current/*.sql;
-			fi;
-		EOH
+	Dir["#{deploy[:deploy_to]}/current/*.sql"].each do |path|
+	  execute "run_sql_#{path}" do
+		command "#{mysql_command} < #{path}"
+	  end
+	end
+	Dir["#{deploy[:deploy_to]}/current/*.sql"].each do |path|
+	  execute "rm_#{path}" do
+		command "rm -v #{path}"
+	  end
 	end
 	
 end
