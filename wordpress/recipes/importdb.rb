@@ -14,7 +14,7 @@ Dir["#{deploy[:deploy_to]}/current/*.sql"].each do |path|
 #		sql "source #{path};"
 #	end
 	execute "run_sql_#{path}" do
-		command "/usr/bin/mysql -h #{deploy[:database][:host]} -u #{deploy[:database][:username]} -p#{deploy[:database][:password]} #{deploy[:database][:database]}" < #{path}"
+		command "/usr/bin/mysql -h #{deploy[:database][:host]} -u #{deploy[:database][:username]} -p#{deploy[:database][:password]} #{deploy[:database][:database]} < #{path}"
 	end
 end
 
