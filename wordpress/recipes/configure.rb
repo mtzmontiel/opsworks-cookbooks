@@ -38,7 +38,7 @@ node[:deploy].each do |app_name, deploy|
             :host       => (deploy[:database][:host] rescue nil),
             :keys       => (keys rescue nil),
             :siteurl    => (node['wordpress']['wp_config']['siteurl'] rescue nil),
-            :sitehome   => (node['wordpress']['wp_config']['home'] rescue nil),
+            :sitehome   => (node['wordpress']['wp_config']['sitehome'] rescue nil),
         )
     end
 end
