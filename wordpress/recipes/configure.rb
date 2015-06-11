@@ -17,7 +17,9 @@ keys = response.body
 
 # Create the Wordpress config file wp-config.php with corresponding values
 node[:deploy].each do |app_name, deploy|
-
+	Chef::Log.info("WP force secure logins: #{node['wordpress']['wp_config']['force_secure_logins']}")
+	Chef::Log.info("WP site url: #{node['wordpress']['wp_config']['siteurl']}")
+	Chef::Log.info("WP site home: #{node['wordpress']['wp_config']['sitehome']}")
     template "#{deploy[:deploy_to]}/current/wp-config.php" do
         source "wp-config.php.erb"
         mode 0660
