@@ -36,7 +36,9 @@ node[:deploy].each do |app_name, deploy|
             :user       => (deploy[:database][:username] rescue nil),
             :password   => (deploy[:database][:password] rescue nil),
             :host       => (deploy[:database][:host] rescue nil),
-            :keys       => (keys rescue nil)
+            :keys       => (keys rescue nil),
+            :siteurl    => (node['wordpress']['wp_config']['siteurl'] rescue nil),
+            :sitehome   => (node['wordpress']['wp_config']['home'] rescue nil),
         )
     end
 end
