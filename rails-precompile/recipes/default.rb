@@ -10,9 +10,9 @@ node[:deploy].each do |application, deploy|
     command 'bundle exec rake assets:precompile'
     environment(
     		'RAILS_ENV' => rails_env,
-    		'PAYPAL_LOGIN' => deploy[:PAYPAL_LOGIN],
-    		'PAYPAL_PASSWD' => deploy[:PAYPAL_PASSWD],
-    		'PAYPAL_SIGN' => deploy[:PAYPAL_SIGN]		
+    		'PAYPAL_LOGIN' => ENV["PAYPAL_LOGIN"],
+    		'PAYPAL_PASSWD' => ENV["PAYPAL_PASSWD"],
+    		'PAYPAL_SIGN' => ENV["PAYPAL_SIGN"]		
     	)
   end
 end
