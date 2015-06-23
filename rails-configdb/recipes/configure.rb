@@ -18,4 +18,8 @@ node[:deploy].each do |app_name, deploy|
 		  File.directory?("#{deploy[:deploy_to]}/shared/config/")
 		end
 	end
+	
+	mysql_chef_gem 'default' do
+	  action :install
+	end
 end
