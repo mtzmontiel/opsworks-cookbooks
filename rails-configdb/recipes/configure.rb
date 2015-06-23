@@ -7,6 +7,13 @@ node[:deploy].each do |app_name, deploy|
 		mode "0660"
 		group deploy[:group]
 		owner deploy[:user]
+		variables(
+			:database => deploy[:environment_variables][:RDS_DB_NAME],
+			:port => deploy[:environment_variables][:RDS_PORT],
+			:host => deploy[:environment_variables][:RDS_HOST],
+			:username => deploy[:environment_variables][:RDS_USERNAME],
+			:password => deploy[:environment_variables][:RDS_PASSWORD],
+			:environment => deploy[:rails_env])
 		only_if do
 		  File.directory?("#{deploy[:deploy_to]}/shared/config/")
 		end

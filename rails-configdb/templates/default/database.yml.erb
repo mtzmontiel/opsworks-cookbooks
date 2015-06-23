@@ -1,13 +1,12 @@
 <% (['development', 'production'] + [@environment]).uniq.each do |env| -%>
 <%= env %>:
-  adapter: <%= @database[:adapter].to_s.inspect %>
-  database: <%= @database[:database].to_s.inspect %>
-  encoding: <%= (@database[:encoding] || 'utf8').to_s.inspect %>
-  host: <%= ENV['RDS_HOSTNAME'] %>
-  port: <%= ENV['RDS_PORT'] %>
-  database: <%= ENV['RDS_DB_NAME'] %>
-  username: <%= ENV['RDS_USERNAME'] %>
-  password: <%= ENV['RDS_PASSWORD'] %>
+  adapter: mysql
+  encoding: utf8
+  host: <%= @hostname.to_s.inspect %>
+  port: <%= @port.to_s.inspect %>
+  database: <%= @database.to_s.inspect %>
+  username: <%= @username.to_s.inspect %>
+  password: <%= @password.to_s.inspect %>
   reconnect: true
 
 <% end %>
