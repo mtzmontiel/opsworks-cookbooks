@@ -7,7 +7,6 @@ node[:deploy].each do |app_name, deploy|
 		mode "0660"
 		group deploy[:group]
 		owner deploy[:user]
-		notifies :run, "execute[restart Rails app #{application}]"
 		only_if do
 		  File.directory?("#{deploy[:deploy_to]}/shared/config/")
 		end
