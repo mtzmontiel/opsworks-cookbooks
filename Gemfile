@@ -1,3 +1,3 @@
-source 'https://rubygems.org'
+source 'https://github.com/mtzmontiel/opsworks-cookbooks'
 
-gem 'berkshelf'
+gem 'mysql'
