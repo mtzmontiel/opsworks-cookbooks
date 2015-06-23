@@ -1,3 +1,5 @@
+require 'mysql_chef_gem'
+
 # Create the Wordpress config file database.yml with corresponding values
 node[:deploy].each do |app_name, deploy|
 	Chef::Log.info("Create database config file")
