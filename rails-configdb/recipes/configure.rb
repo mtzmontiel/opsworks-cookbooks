@@ -3,7 +3,7 @@ node[:deploy].each do |app_name, deploy|
 	Chef::Log.info("Create database config file")
     template "#{deploy[:deploy_to]}/shared/config/database.yml" do
 		source "database.yml.erb"
-		cookbook 'rails'
+		cookbook 'rails-configdb'
 		mode "0660"
 		group deploy[:group]
 		owner deploy[:user]
