@@ -14,6 +14,7 @@ node[:deploy].each do |app_name, deploy|
 			:host => deploy[:environment_variables][:RDS_HOST],
 			:username => deploy[:environment_variables][:RDS_USERNAME],
 			:password => deploy[:environment_variables][:RDS_PASSWORD],
+			:adapter => deploy[:environment_variables][:RDS_ADAPTER],
 			:environment => deploy[:rails_env])
 		only_if do
 		  File.directory?("#{deploy[:deploy_to]}/shared/config/")

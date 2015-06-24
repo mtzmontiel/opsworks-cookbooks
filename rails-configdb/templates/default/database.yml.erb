@@ -1,6 +1,6 @@
 <% (['development', 'production'] + [@environment]).uniq.each do |env| -%>
 <%= env %>:
-  adapter: mysql
+  adapter: <% @adapter.to_s.inspect %>
   encoding: utf8
   host: <%= @host.to_s.inspect %>
   port: <%= @port.to_i.inspect %>
