@@ -1,4 +1,3 @@
-require 'mysql_chef_gem'
 
 # Create the Wordpress config file database.yml with corresponding values
 node[:deploy].each do |app_name, deploy|
@@ -21,7 +20,4 @@ node[:deploy].each do |app_name, deploy|
 		end
 	end
 	
-	mysql_chef_gem 'default' do
-	  action :install
-	end
 end
