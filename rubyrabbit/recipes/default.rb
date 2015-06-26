@@ -8,7 +8,15 @@ node[:deploy].each do |application, deploy|
   execute 'rake rabit_worker' do
     cwd current_path
     user 'deploy'
-    command 'bundle exec rake bunny_worker'
+    command <<-EOF
+      # Retrieve process id for bunny_worker
+      RABBIT_PROC=` ps aux | grep bunny_worker | awk '{print $2}' `
+      if [ $? -eq 0 ]
+         then echo "Removing process: " $RABBIT_PROC 
+      else echo "No bunny_worker process. nothing to kill." $RABBIT_PROC " ."
+      fi
+      nohup bundle exec rake bunny_worker > /var/log/bunny_worker.log &
+    EOF
     environment env_hash
   end
 end
