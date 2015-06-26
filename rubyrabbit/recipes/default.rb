@@ -14,7 +14,6 @@ node[:deploy].each do |application, deploy|
       if [ $? -eq 0 ]
          then echo "Removing process: " $RABBIT_PROC | tee -a ./log/bunny_worker.stop
             kill $RABBIT_PROC
-          done
       else echo "No bunny_worker process. nothing to kill." $RABBIT_PROC " ." | tee -a ./log/bunny_worker.stop
       fi
       nohup bundle exec rake bunny_worker > ./log/bunny_worker.log &
