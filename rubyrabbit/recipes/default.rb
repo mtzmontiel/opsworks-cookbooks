@@ -5,7 +5,7 @@ node[:deploy].each do |application, deploy|
   env_hash = { 'RAILS_ENV' => rails_env }
   deploy[:environment_variables].each { |key, value| env_hash[key] = value }
   Chef::Log.info("Starting Rails rabbit worker with environment #{rails_env}")
-  execute 'rake rabit_worker' do
+  bash 'rake rabit_worker' do
     cwd current_path
     user 'deploy'
     command <<-EOH
