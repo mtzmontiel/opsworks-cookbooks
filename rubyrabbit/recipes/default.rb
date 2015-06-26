@@ -8,7 +8,7 @@ node[:deploy].each do |application, deploy|
   execute 'rake rabit_worker' do
     cwd current_path
     user 'deploy'
-    command 'bundle exec rake rabbit_worker'
+    command 'bundle exec rake bunny_worker'
     environment env_hash
   end
 end
