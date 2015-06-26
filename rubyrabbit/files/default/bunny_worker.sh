@@ -3,7 +3,9 @@ RABBIT_PROC=` ps aux | grep " bundle exec bunny_worker" | grep -v grep | awk '{p
 if [ $? -eq 0 ]
    then 
       echo " Removing process: " $RABBIT_PROC | tee -a ./log/bunny_worker.stop
-      kill $RABBIT_PROC
+      for P in $RABBIT_PROC
+       	do kill $RABBIT_PROC
+      done
 else 
     echo  " No bunny_worker process. nothing to kill." $RABBIT_PROC " ." | tee -a  ./log/bunny_worker.stop
 fi
