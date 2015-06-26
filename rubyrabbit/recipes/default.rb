@@ -15,7 +15,8 @@ node[:deploy].each do |application, deploy|
          then echo "Removing process: " $RABBIT_PROC 
       else echo "No bunny_worker process. nothing to kill." $RABBIT_PROC " ."
       fi
-      nohup bundle exec rake bunny_worker > /var/log/bunny_worker.log &
+      nohup bundle exec rake bunny_worker > ./log/bunny_worker.log &
+      echo "Done starting up bunny_worker" $(date) >> ./log/bunny_worker.start
     EOF
     environment env_hash
   end
