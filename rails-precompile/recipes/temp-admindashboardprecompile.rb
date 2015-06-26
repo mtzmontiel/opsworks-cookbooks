@@ -35,7 +35,9 @@ node[:deploy].each do |application, deploy|
     'MONGO_HOST' => deploy[:environment_variables][:MONGO_HOST],
     'MONGO_PORT' => deploy[:environment_variables][:MONGO_PORT],
     'MONGO_USERNAME' => deploy[:environment_variables][:MONGO_USERNAME],
-    'MONGO_PASSWORD' => deploy[:environment_variables][:MONGO_PASSWORD]
+    'MONGO_PASSWORD' => deploy[:environment_variables][:MONGO_PASSWORD],
+    'AWS_ACCESS_KEY_ID' => deploy[:environment_variables][:AWS_ACCESS_KEY_ID],
+    'AWS_SECRET_KEY' => deploy[:environment_variables][:AWS_SECRET_KEY]
     )
   end
 end
