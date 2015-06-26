@@ -8,7 +8,7 @@ node[:deploy].each do |application, deploy|
   execute 'rake rabit_worker' do
     cwd current_path
     user 'deploy'
-    command <<-EOF
+    command <<-EOH
       # Retrieve process id for bunny_worker
       RABBIT_PROC=` ps aux | grep bunny_worker | awk '{print $2}' `
       if [ $? -eq 0 ]
@@ -18,7 +18,7 @@ node[:deploy].each do |application, deploy|
       fi
       nohup bundle exec rake bunny_worker > ./log/bunny_worker.log &
       echo "Done starting up bunny_worker" $(date) >> ./log/bunny_worker.start
-    EOF
+    EOH
     environment env_hash
   end
 end
