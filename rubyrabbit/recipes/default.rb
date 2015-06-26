@@ -22,6 +22,5 @@ node[:deploy].each do |application, deploy|
         exit 0
       EOH
     environment env_hash
-    action :nothing
   end
 end
