@@ -2,17 +2,13 @@ node[:deploy].each do |application, deploy|
   rails_env = deploy[:rails_env]
   current_path = deploy[:current_path]
 
-  Chef::Log.info("Precompiling Rails assets with environment #{rails_env}")
-
+  env_hash = { 'RAILS_ENV' => rails_env }
+  deploy[:environment_variables].each { |key, value| env_hash[key] = value }
+  Chef::Log.info("Precompiling Rails assets with environment #{env_hash}")
   execute 'rake assets:precompile' do
     cwd current_path
     user 'deploy'
     command 'bundle exec rake assets:precompile'
-    environment(
-    		'RAILS_ENV' => rails_env,
-    		'PAYPAL_LOGIN' => deploy[:environment_variables][:PAYPAL_LOGIN],
-    		'PAYPAL_PASSWD' => deploy[:environment_variables][:PAYPAL_PASSWD],
-    		'PAYPAL_SIGN' => deploy[:environment_variables][:PAYPAL_SIGN]
-    	)
+    environment env_hash
   end
 end
