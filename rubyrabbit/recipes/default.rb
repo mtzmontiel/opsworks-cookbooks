@@ -11,7 +11,7 @@ node[:deploy].each do |application, deploy|
     mode 0755
   end
   
-  execute 'rake rabit_worker' do
+  execute 'start bunny_worker' do
     cwd current_path
     user 'deploy'
     environment env_hash
